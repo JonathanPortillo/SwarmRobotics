@@ -32,6 +32,7 @@
 					<li><a href="method.html">Method</a></li>
 					<li><a href="results.html">Results</a></li>
 					<li><a href="conclusion_future_work.html">Conclusion/Future Work</a></li>
+					<li><a href="references.html">References</a></li>
 				</ul>
 			</nav>
 
@@ -43,23 +44,22 @@
 				<div class="inner">
 					<header class="special">
 						<h2>Method</h2>
-						<p>
-							<p>In this paper, we implement Wang and Rubenstein’s algorithm where a decentralized swarm of <span class="math inline">\(n\)</span> identical robots, represented by set <span class="math inline">\(A\)</span>, is controlled from their initial positions to an arbitrary target formation represented by <span class="math inline">\(Q\)</span>, the set of goal coordinates, using collision-free and deadlock-free paths. For this paper we assume <span class="math inline">\(|A| = |Q|\)</span>.</p>
-							<p>Each agent <span class="math inline">\(a_{i} \in A\)</span> is modeled as a circle with radius <span class="math inline">\(r\)</span>. There are three main methods by which the agents operate: motion planner, new goal selector, and broadcaster. The motion planner continuously checks for messages from the agent’s neighbors at intervals of <span class="math inline">\(\Delta t\)</span>. It then checks for a valid space to move to and moves the agent. We assume that each agent has the same clock frequency <span class="math inline">\(f_{clock}\)</span> and velocity <span class="math inline">\(v\)</span>.</p>
-							<p>The new goal selector continuously sends and receives requests to swap goals with neighbors which helps prevent deadlock and ensures fast convergence. It uses a 2-way swap in which an agent acts as a client and another acts as a server. The client sends a swap request to the server and the server can either accept or deny the request.</p>
-							<p>The third method, broadcaster, enables the agents to communicate with each other. Each agent communicates its state with negligible latency and communication error to all robots within a communication range <span class="math inline">\(R &gt; 2\sqrt{2}r\)</span> at a fixed rate <span class="math inline">\(f_{comm}\)</span>. To ensure collision-free paths, we enforce <span class="math inline">\(\Delta t = 2/f_{comm}\)</span>. We define <span class="math inline">\(p_{a_{i}}(t)\)</span> as the position of <span class="math inline">\(a_i\)</span> at time <span class="math inline">\(t\)</span>. Similarly, <span class="math inline">\(T_{a_{i}}(t)\)</span> is the position assigned to <span class="math inline">\(a_i\)</span> at time <span class="math inline">\(t\)</span>.</p>
-							<p>Deadlock-free paths are defined as those where no two robots are assigned the same target position once all robots are guaranteed to be at their assigned position. This is formally defined below by Equation 1: <span class="math inline">\(\exists t_{max} &gt; 0 \ \text{ s.t.} \ \forall t &gt; t_{max}, \ \forall a_{i} \in A, p_{a_{i}}(t) = T_{a_{i}}(t) \text{and} \ \forall a_i \neq a_j, T_{a_{i}}(t) \neq T_{a_{j}}(t)\)</span></p>
-							<p>Collision free paths, as the name suggests, are those in which the robots never collide. This is formally defined below by Equation 2: <span class="math inline">\(\forall t \geq 0, {} \mbox{for any two agents, } a_i \neq a_j , \Vert p_{a_i}(t) - p_{a_j}(t) \Vert \geq 2r\)</span></p>
-							<p>Furthermore, we make a novel contribution to their work in the form of an extension of their algorithm to the case of a continuous state space.</p></p>
+						<p>In this paper, we implement an algorithm where a decentralized swarm of <span class="math inline">\(n\)</span> identical robots, represented by set <span class="math inline">\(A\)</span>, is controlled from their initial positions to an arbitrary target formation represented by <span class="math inline">\(Q\)</span>, the set of goal coordinates, using collision-free and deadlock-free paths. For this paper we assume <span class="math inline">\(|A| = |Q|\)</span>.</p>
+						<p>Each agent <span class="math inline">\(a_{i} \in A\)</span> is modeled as a circle with radius <span class="math inline">\(r\)</span>. There are three main methods by which the agents operate: motion planner, new goal selector, and broadcaster.</p>
+						<p>The motion planner continuously checks for messages from the agent’s neighbors at intervals of <span class="math inline">\(\Delta t\)</span>. It then checks for a valid space to move to and moves the agent. We assume that each agent has the same clock frequency <span class="math inline">\(f_{clock}\)</span> and velocity <span class="math inline">\(v\)</span>. The new goal selector continuously sends and receives requests to swap goals with neighbors which helps prevent deadlock and ensures fast convergence. It uses a 2-way swap in which an agent acts as a client and another acts as a server. The client sends a swap request to the server and the server can either accept or deny the request.</p>
+						<p>The third method, broadcaster, enables the agents to communicate with each other. Each agent communicates its state with negligible latency and communication error to all robots within a communication range <span class="math inline">\(R &gt; 2\sqrt{2}r\)</span> at a fixed rate <span class="math inline">\(f_{comm}\)</span>. To ensure collision-free paths, we enforce <span class="math inline">\(\Delta t = 2/f_{comm}\)</span>. We define <span class="math inline">\(p_{a_{i}}(t)\)</span> as the position of <span class="math inline">\(a_i\)</span> at time <span class="math inline">\(t\)</span>. Similarly, <span class="math inline">\(T_{a_{i}}(t)\)</span> is the position assigned to <span class="math inline">\(a_i\)</span> at time <span class="math inline">\(t\)</span>.</p>
+						<p>Deadlock-free paths are defined as those where no two robots are assigned the same target position once all robots are guaranteed to be at their assigned position. This is formally defined below by Equation 1: <span class="math inline">\(\exists t_{max} &gt; 0 \ \text{ s.t.} \ \forall t &gt; t_{max}, \ \forall a_{i} \in A, p_{a_{i}}(t) = T_{a_{i}}(t) \text{and} \ \forall a_i \neq a_j, T_{a_{i}}(t) \neq T_{a_{j}}(t)\)</span></p>
+						<p>Collision free paths, as the name suggests, are those in which the robots never collide. This is formally defined below by Equation 2: <span class="math inline">\(\forall t \geq 0, {} \mbox{for any two agents, } a_i \neq a_j , \Vert p_{a_i}(t) - p_{a_j}(t) \Vert \geq 2r\)</span></p>
+						
 					</header>
 					<div class="w3-center"> 
 						<img class = "w3-content w3-margin w3-card w3-small" height= "200" width="200" src="images/method1.png" alt="" />
-						<img class = "w3-card w3-margin w3-small" height= "200" width="200" src="images/method2.png" alt="" />
+						<img class = "w3-card w3-margin w3-small" height= "200" width="300" src="images/method2.png" alt="" />
 						<img class = "w3-card w3-margin w3-small" height= "200" width="200" src="images/method3.png" alt="" />
 						<img class = "w3-card w3-margin w3-small" height= "200" width="200" src="images/method4.png" alt="" />
 				
 					</div>
-					<div class="highlights">
+					
 						<section>
 							<div class="content">
 								<header>
@@ -94,7 +94,7 @@
 								<p>The second modification was to choose a different way of traversing through the space. We couldn’t just have up, down, left, and right as candidate spots for the next step. Thus, we used a polar coordinate design for stepping through the space. Each robot would be able to move the same distance per step (same radial distance) but would have the choice of the angle it could move at. We found that the more choices of angles the robot had, the slower the algorithm would be. Thus, we empirically found a resolution of 16 candidate angles to be feasible in the runtime of the algorithm.</p>
 							</div>
 						</section>
-				</div>
+				
 			</section>
 
 		
@@ -113,7 +113,7 @@
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic01.jpg" alt="" />
+										<img src="images/jonathan.jpg" alt="" />
 									</div>
 									<p class="credit">- <strong>Jonathan Portillo</strong> </p>
 								</div>
@@ -122,11 +122,11 @@
 						<section>
 							<div class="content">
 								<blockquote>
-									<p>Input Major / Year</p>
+									<p>EECS / 2021</p>
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/varun.jpg" alt="" />
 									</div>
 									<p class="credit">- <strong>Varun Jhunjhunwalla</strong> </p>
 								</div>
@@ -135,11 +135,11 @@
 						<section>
 							<div class="content">
 								<blockquote>
-									<p>Input Major / Year</p>
+									<p>EECS / 2021</p>
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic02.jpg" alt="" />
+										<img src="images/shreyas.png" alt="" />
 									</div>
 									<p class="credit">- <strong>Shreyas Agarwal</strong> </p>
 								</div>
@@ -153,26 +153,11 @@
 			<footer id="footer">
 				<div class="inner">
 					<div class="content">
+						
 						<section>
-							<h3>Accumsan montes viverra</h3>
-							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
-						</section>
-						<section>
-							<h4>Sem turpis amet semper</h4>
-							<ul class="alt">
-								<li><a href="#">Dolor pulvinar sed etiam.</a></li>
-								<li><a href="#">Etiam vel lorem sed amet.</a></li>
-								<li><a href="#">Felis enim feugiat viverra.</a></li>
-								<li><a href="#">Dolor pulvinar magna etiam.</a></li>
-							</ul>
-						</section>
-						<section>
-							<h4>Magna sed ipsum</h4>
+							<h4>Project Repository</h4>
 							<ul class="plain">
-								<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
-								<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
-								<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
-								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+								<li><a href="https://github.com/robot1230/EE106B_final_proj"><i class="icon fa-github">&nbsp;</i>Github</a></li>
 							</ul>
 						</section>
 					</div>

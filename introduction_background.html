@@ -31,6 +31,7 @@
 					<li><a href="method.html">Method</a></li>
 					<li><a href="results.html">Results</a></li>
 					<li><a href="conclusion_future_work.html">Conclusion/Future Work</a></li>
+					<li><a href="references.html">References</a></li>
 				</ul>
 			</nav>
 
@@ -42,16 +43,18 @@
 				<div class="inner">
 					<header class="special">
 						<h2>Introduction and Background</h2>
-						<p>Swarm robotics is a field in which multiple robots (agents)are  controlled  in  a  decentralized  manner.  There  are  certainrequirements  to  full  fill  in  order  for  a  multi-robotic  systemto be considered a swarm robotic system. Robots within themulti-robotic  system  must  work  autonomously  using  theirbasic  sensors  to  interact  with  the  environment  and  otheragents.  The  algorithms  and  controllers  used  in  the  systemmust  operate  for  a  wide  range  of  total  agents.  The  roboticsystem  must  also  maintain  homogeneity  with  the  robotsused  such  that  they  are  similar  physically  and  in  sensingcapabilities</p>
+						<p>Swarm robotics is a field of robotics in which multiple robots work together to complete a task. Research in this field has several applications ranging from nanotechnology to defense. There are two main approaches in swarm robotics. The first is a centralized approach where all robots have access to global information and a centralized controller drives them to a goal state. The other type is decentralized control where each robot can only communicate with its neighbors but the swarm must still be able to coordinate itself. While all robots have global information and it is easier to control the swarm into particular patterns in the centralized approach, it is also computationally heavier than the decentralized one. In the decentralized approach, robots work with reduced access to information allowing for faster computations and faster maneuvers though it is harder to coordinate such an unorganized swarm.
+
+						One of the fundamental problems in swarm systems is shape formation. Wang and Rubenstein [1] propose an algorithm for the decentralized version of this problem, where robots can provably converge to a desired shape. This is appealing for both the speed of convergence and the fact that they have proven the algorithm to converge successfully, an assurance that is difficult to provide in the field of decentralized control. We further examine their claims and look for ways to extend their work for better efficiency.</p>
 						<img class = "w3-card" src="images/intro1.png" alt="" />
 						<img class = "w3-card" src="images/intro2.png" alt="" />
 						<img class = "w3-card" src="images/intro3.png" alt="" />
 					</header>
-					<div class="highlights">
+					
 						<section>
 							<div class="content">
 								<header>
-									<h3>Focus and Expectations</h3>
+									<h3>Problem statement</h3>
 								</header>
 								<p>In this paper we explore the usage of multi-robotic decen-tralized  controllers  for  the  purpose  of  creating  an  efficientand dynamic algorithm for shape formation. Using the feed-back  from  the  agents  in  our  system  allows  our  controllersto  make  a  movement  decision  for  each  of  our  agents.  Oursimulation  based  experiments  consists  of  large  quantity  ofagents in a given map with and without constraints</p>
 							</div>
@@ -61,7 +64,9 @@
 								<header>
 									<h3>Motivation</h3>
 								</header>
-								<p>We  are  interested  in  improving  the  decentralized  control  ofswarms. We are specifically interested on further developingWang  and  Rubinstein’s  algorithm  for  decentralized  shapeformation and it serves as our main motivation. We are alsoinspired  by  content  covered  in  EECS  106B  projects  suchas  path  planning  with  object  avoidance,  trajectory  planningand  assigning  goal  states  intelligently.  We  made  use  of  ourinsights  from  exploring  these  topics  in  lab  when  exploringthe collision-free and deadlock-free guarantees of our algo-rithm.</p>
+								<p> A large part of the motivation for this project came from sharing the same skepticism as Professor Sastry when we first read Wang and Rubinstein's paper [1]. It seemed too good to be true and we were curious to see if we could replicate their results. Many aspects of the paper seemed like they could be further explored, such the use of a discrete space and non-complex metrics. Furthermore, work by other groups as discussed in Section II largely shaped the direction of our project.
+ 
+ 								As explained in the introduction, we are interested in improving the decentralized control of swarms. We are specifically interested in exploring [1] and it serves as our primary motivation. We are also inspired by content covered in EECS 106B projects such as path planning with object avoidance, trajectory planning and intelligent goal picking. We made use of our insights from exploring these topics in lab throughout this project. We also made use of our previous work with Rapidly-Exploring Random Trees (RRTs) and goal selecting when working on the goal manager for our algorithm. We also used our understanding of optimization problems from class to evaluate the performance of the algorithm and used our understanding of controllers to build the asynchronous simulator.</p>
 							</div>
 						</section>
 						<section>
@@ -73,7 +78,7 @@
 							</div>
 						</section>
 						
-					</div>
+					
 				</div>
 			</section>
 
@@ -93,7 +98,7 @@
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic01.jpg" alt="" />
+										<img src="images/jonathan.jpg" alt="" />
 									</div>
 									<p class="credit">- <strong>Jonathan Portillo</strong> </p>
 								</div>
@@ -102,11 +107,11 @@
 						<section>
 							<div class="content">
 								<blockquote>
-									<p>Input Major / Year</p>
+									<p>EECS / 2021</p>
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/varun.jpg" alt="" />
 									</div>
 									<p class="credit">- <strong>Varun Jhunjhunwalla</strong> </p>
 								</div>
@@ -115,11 +120,11 @@
 						<section>
 							<div class="content">
 								<blockquote>
-									<p>Input Major / Year</p>
+									<p>EECS / 2021</p>
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic02.jpg" alt="" />
+										<img src="images/shreyas.png" alt="" />
 									</div>
 									<p class="credit">- <strong>Shreyas Agarwal</strong> </p>
 								</div>
@@ -134,25 +139,9 @@
 				<div class="inner">
 					<div class="content">
 						<section>
-							<h3>Accumsan montes viverra</h3>
-							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
-						</section>
-						<section>
-							<h4>Sem turpis amet semper</h4>
-							<ul class="alt">
-								<li><a href="#">Dolor pulvinar sed etiam.</a></li>
-								<li><a href="#">Etiam vel lorem sed amet.</a></li>
-								<li><a href="#">Felis enim feugiat viverra.</a></li>
-								<li><a href="#">Dolor pulvinar magna etiam.</a></li>
-							</ul>
-						</section>
-						<section>
-							<h4>Magna sed ipsum</h4>
+							<h4>Project Repository</h4>
 							<ul class="plain">
-								<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
-								<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
-								<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
-								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+								<li><a href="https://github.com/robot1230/EE106B_final_proj"><i class="icon fa-github">&nbsp;</i>Github</a></li>
 							</ul>
 						</section>
 					</div>

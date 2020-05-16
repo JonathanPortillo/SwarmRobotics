@@ -29,10 +29,11 @@
 			<nav id="menu">
 				<ul class="links">
 					<li><a href="index.html">Home</a></li>
-					<li><a href="introduction_background.html">Elements</a></li>
-					<li><a href="method.html">Generic</a></li>
-					<li><a href="results.html">Generic</a></li>
-					<li><a href="conclusion_future_work.html">Generic</a></li>
+					<li><a href="introduction_background.html">Introduction/Background</a></li>
+					<li><a href="method.html">Method</a></li>
+					<li><a href="results.html">Results</a></li>
+					<li><a href="conclusion_future_work.html">Conclusion/Future Work</a></li>
+					<li><a href="references.html">References</a></li>
 				</ul>
 			</nav>
 
@@ -44,71 +45,16 @@
 				<div class="inner">
 					<header class="special">
 						<h2>Conclusion and Future Work</h2>
-						<h3>Authors: Varun Jhunjhunwalla, Shreyas Agarwa, Jonathan Portillox <h3>
-						<ul>
-<li><p>Case 1: If the ’traffic graph’ is acylic and there exists some head agent <span class="math inline">\(a_i\)</span> that has not reached it’s goal. By definition, this agent has a free path and can reduce <span class="math inline">\(J_{1}\)</span> by 1.</p></li>
-<li><p>Case 2: If the graph is cyclic. It can be shown by contradiction, that agents will always be able to swap goals in the opposite direction of the cycle without the need to move with non-zero probability. (TODO: refer to random part of psudecode).</p></li>
-<li><p>Case 3: The graph is acyclic and all head agents have reached a goal. This case can essentially be reduced to one of the above cases by swapping goals with a head agent.</p></li>
-</ul>
-
-h
 					</header>
-					<div class="highlights">
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-									<h3>Feugiat consequat</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
-									<h3>Ante sem integer</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
-									<h3>Ipsum consequat</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-line-chart"><span class="label">Icon</span></a>
-									<h3>Interdum gravida</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
-									<h3>Faucibus consequat</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-						<section>
-							<div class="content">
-								<header>
-									<a href="#" class="icon fa-qrcode"><span class="label">Icon</span></a>
-									<h3>Accumsan viverra</h3>
-								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-							</div>
-						</section>
-					</div>
+						<h3> Conclusion: </h3>
+						<p>This paper aims to explore and extend recent decentralized swarm research. We specifically focus on an asynchronous decentralized shape formation algorithm by Wang and Rubinstein [1]. We implement an asynchronous decentralized swarm simulator and verify the correctness of the algorithm in [1]. We also extend this algorithm to continuous space and compare the two algorithms. The discrete version of the algorithm is able to guarantee convergence with a relatively low runtime. The continuous version cannot guarantee convergence and runs rather slowly but is able to plan efficient paths. These are important trade-offs to consider when choosing between the two versions of the algorithm. The discrete version would work best for tasks where the agents have lower computational power or a small runtime matters more than efficiency. The continuous case, on the other hand, optimizes for agent movement and can be useful if we have battery or fuel constraints.</p>
+
+						<h3> Future Work: </h3>
+						<p>The next step for this project would involve integrating more sophisticated ideas from the works described in Section 2. The continuous algorithm can be improved if given a better distance metric for goal swapping. This is because the guarantees provided by the euclidean metric don't exist in the continuous case since the triangle inequality doesn't hold. Ways to do this include sampling paths with noise or creating jerks in the environment if there has been no motion for some number frames. Both of these methods can help reorient our system to prevent deadlock and significantly reduce runtime.
+						We also hope to extend the theoretical results to the continuous case and determine criteria for convergence. 
+						Lastly, we're interested in making use of shape functions and their first order information to more intelligently plan paths. However, we'd like to do this without complete aggregation and build on the results of [5] and [6].</p>
+	
+				
 				</div>
 			</section>
 
@@ -128,7 +74,7 @@ h
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic01.jpg" alt="" />
+										<img src="images/jonathan.jpg" alt="" />
 									</div>
 									<p class="credit">- <strong>Jonathan Portillo</strong> </p>
 								</div>
@@ -137,11 +83,11 @@ h
 						<section>
 							<div class="content">
 								<blockquote>
-									<p>Input Major / Year</p>
+									<p>EECS / 2021</p>
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic03.jpg" alt="" />
+										<img src="images/varun.jpg" alt="" />
 									</div>
 									<p class="credit">- <strong>Varun Jhunjhunwalla</strong> </p>
 								</div>
@@ -150,11 +96,11 @@ h
 						<section>
 							<div class="content">
 								<blockquote>
-									<p>Input Major / Year</p>
+									<p>EECS / 2021</p>
 								</blockquote>
 								<div class="author">
 									<div class="image">
-										<img src="images/pic02.jpg" alt="" />
+										<img src="images/shreyas.png" alt="" />
 									</div>
 									<p class="credit">- <strong>Shreyas Agarwal</strong> </p>
 								</div>
@@ -169,25 +115,9 @@ h
 				<div class="inner">
 					<div class="content">
 						<section>
-							<h3>Accumsan montes viverra</h3>
-							<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
-						</section>
-						<section>
-							<h4>Sem turpis amet semper</h4>
-							<ul class="alt">
-								<li><a href="#">Dolor pulvinar sed etiam.</a></li>
-								<li><a href="#">Etiam vel lorem sed amet.</a></li>
-								<li><a href="#">Felis enim feugiat viverra.</a></li>
-								<li><a href="#">Dolor pulvinar magna etiam.</a></li>
-							</ul>
-						</section>
-						<section>
-							<h4>Magna sed ipsum</h4>
+							<h4>Project Repository</h4>
 							<ul class="plain">
-								<li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
-								<li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
-								<li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
-								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+								<li><a href="https://github.com/robot1230/EE106B_final_proj"><i class="icon fa-github">&nbsp;</i>Github</a></li>
 							</ul>
 						</section>
 					</div>
