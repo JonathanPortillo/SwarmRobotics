@@ -52,36 +52,48 @@
 							<p>Collision free paths, as the name suggests, are those in which the robots never collide. This is formally defined below by Equation 2: <span class="math inline">\(\forall t \geq 0, {} \mbox{for any two agents, } a_i \neq a_j , \Vert p_{a_i}(t) - p_{a_j}(t) \Vert \geq 2r\)</span></p>
 							<p>Furthermore, we make a novel contribution to their work in the form of an extension of their algorithm to the case of a continuous state space.</p></p>
 					</header>
+					<div class="w3-center"> 
+						<img class = "w3-content w3-margin w3-card w3-small" height= "200" width="200" src="images/method1.png" alt="" />
+						<img class = "w3-card w3-margin w3-small" height= "200" width="200" src="images/method2.png" alt="" />
+						<img class = "w3-card w3-margin w3-small" height= "200" width="200" src="images/method3.png" alt="" />
+						<img class = "w3-card w3-margin w3-small" height= "200" width="200" src="images/method4.png" alt="" />
+				
+					</div>
 					<div class="highlights">
 						<section>
 							<div class="content">
 								<header>
-									<a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-									<h3>Feugiat consequat</h3>
+									
+									<h3>Motion Planner</h3>
 								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+								<p><p>The first part that needed to be changed was the receiving of messages by the motion planner. Since we did not have the hardware necessary for receiving broadcasts from neighboring robots, we developed an artificial broadcasting mechanism in which each agent <span class="math inline">\(a_i\)</span> had its own instance variable <span class="math inline">\(msg_i\)</span> containing the message that it would "broadcast" at the current time. Every agent would check its neighbors by iterating through the entire set of robots and choosing the ones who were within a range <span class="math inline">\(R\)</span> (the communication range) and store its message variable. Also, the algorithm required all messages from the past <span class="math inline">\(\Delta t\)</span> seconds to be taken. Since, <span class="math inline">\(\Delta t\)</span> was very small in comparison to agent message updates, we kept sampling the most recent message from all neighboring agents for <span class="math inline">\(\Delta t\)</span> seconds. We kept the final set of messages and continued the algorithm. Additionally, <span class="math inline">\(2/f_{comm}\)</span> was a very small time interval compared to the latency in the context switching required by multi-threading. Thus, we empirically chose <span class="math inline">\(\Delta t\)</span> to be <span class="math inline">\(180/f_{comm}\)</span> where <span class="math inline">\(f_{comm} = 200\)</span></p></p>
 							</div>
 						</section>
 						<section>
 							<div class="content">
 								<header>
-									<a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
-									<h3>Ante sem integer</h3>
+	
+									<h3>New Goal Selector</h3>
 								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+								<p><p>The new goal selector was altered so that goal swapping could occur safely without race conditions. This was particularly important in the 2-way swaps. Swap requests for each agent were kept in a list of requests stored as a variable for each agent. Since a server could have multiple requests, there needed to be a secure way for clients to add their request to the server’s list without causing a race condition with another client trying to swap with the same server. Thus, two kinds of locks were implemented, a request lock (<span class="math inline">\(REQ\)</span>) and an acknowledgement lock (<span class="math inline">\(ACK\)</span>).</p>
+								<p>Each request list had an <span class="math inline">\(REQ\)</span> and every agent had an <span class="math inline">\(ACK\)</span>. Thus, if a client wanted to send a request to a server, it would need to obtain the corresponding <span class="math inline">\(REQ\)</span>, add its request to the list, and release the <span class="math inline">\(REQ\)</span>. The server would obtain its <span class="math inline">\(REQ\)</span> and look through the list of requests for a client who it wants to swap goals with. If such a client was there, then the server would obtain the client’s <span class="math inline">\(ACK\)</span>, send the client its goal, and release the <span class="math inline">\(ACK\)</span>. Otherwise, it would just ignore the requests (the request would be removed after a timeout interval by the client itself). Then the server would release the <span class="math inline">\(REQ\)</span> after looking through its requests. This proved to be an easy and effective way of simulating 2-way requests between multiple clients and a server.</p></p>
 							</div>
 						</section>
 						<section>
 							<div class="content">
 								<header>
-									<a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
-									<h3>Ipsum consequat</h3>
+									<h3>Broadcaster</h3>
 								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+								<p><p>To simulate broadcasting signals from a physical system at a fixed rate of <span class="math inline">\(f_{comm}\)</span>, we set each agent’s variable <span class="math inline">\(msg_i\)</span> to the current state of the agent and then had the method sleep for <span class="math inline">\(1/f_{comm}\)</span> seconds.</p></p>
+
+								<header>
+									<h3>Extension into Continuous Domain</h3>
+								</header>
+								<p>With the basic algorithm established by Wang and Rubenstein simulated, we moved on to simulating the algorithm in the continuous domain. This required some more modification to allow the same convergence properties in the continuous domain.</p>
+								<p>The first modification was to choose an appropriate distance metric. While we used manhattan distance in the discrete grid setup, we switched to the L2-norm distance metric in the continuous setup. This allowed for a better approximation of the distance between points.</p>
+								<p>The second modification was to choose a different way of traversing through the space. We couldn’t just have up, down, left, and right as candidate spots for the next step. Thus, we used a polar coordinate design for stepping through the space. Each robot would be able to move the same distance per step (same radial distance) but would have the choice of the angle it could move at. We found that the more choices of angles the robot had, the slower the algorithm would be. Thus, we empirically found a resolution of 16 candidate angles to be feasible in the runtime of the algorithm.</p>
 							</div>
 						</section>
-				
-					</div>
 				</div>
 			</section>
 
