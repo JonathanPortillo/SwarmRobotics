@@ -44,7 +44,7 @@
 				<div class="inner">
 					<header class="special">
 						<h2>Method</h2>
-						<p>In this paper, we implement an algorithm where a decentralized swarm of <span class="math inline">\(n\)</span> identical robots is controlled from their initial positions to an arbitrary target formation using collision-free and deadlock-free paths. Each robot has three main components: motion planner, new goal selector, and broadcaster, all of which are run simulataneously.</p>
+						<p>In this paper, we implement an algorithm where a decentralized swarm of <span class="math inline">\(n\)</span> identical robots is controlled from their initial positions to an arbitrary target formation using collision-free and deadlock-free paths. Each robot has three main components: motion planner, new goal selector, and broadcaster, all of which are run simulataneously. Each of the three methods is run on a separate thread and each robot is executed on a separate thread. Thus, for <span class="math inline">\(n\)</span> robots, we have <span class="math inline">\(3n\)</span> threads running at any given time.</p>
 						<p>The motion planner continuously monitors the states of the robot's neighbors, looking for a nearby free area to move to. It is the main part that uses information from the new goal selector and broadcaster to continually update the robot's own state. On every iteration, it waits for <span class="math inline">\(\Delta t\)</span> seconds, watching its neighbors and listening to broadcasts and then it moves after making a decision.</p>
 						<p>The new goal selector continuously sends and receives requests to swap goals with neighbors which helps prevent deadlock and ensures fast convergence. It focuses on updating the robot's goal state so that it does not share the same goal state as another robot once the algorithm is complete. It uses a 2-way swap in which one robot acts as a client and another acts as a server. The client sends a swap request to the server and the server can either accept or deny the request. This provides a structured way for fast goal updates in an unstructured swarm.</p>
 						<p>The third method, broadcaster, enables the agents to communicate with each other. Each agent communicates its state to all robots within a communication range <span class="math inline">\(R\)</span> at a fixed rate <span class="math inline">\(f_{comm}\)</span>. To ensure collision-free paths, we enforce <span class="math inline">\(\Delta t = 2/f_{comm}\)</span>.</p>
@@ -59,7 +59,7 @@
 
 					</div>
 
-						<section>
+						<!-- <section>
 							<div class="content">
 								<header>
 
@@ -67,8 +67,8 @@
 								</header>
 								<p><p>The first part that needed to be changed was the receiving of messages by the motion planner. Since we did not have the hardware necessary for receiving broadcasts from neighboring robots, we developed an artificial broadcasting mechanism in which each agent <span class="math inline">\(a_i\)</span> had its own instance variable <span class="math inline">\(msg_i\)</span> containing the message that it would "broadcast" at the current time. Every agent would check its neighbors by iterating through the entire set of robots and choosing the ones who were within a range <span class="math inline">\(R\)</span> (the communication range) and store its message variable. Also, the algorithm required all messages from the past <span class="math inline">\(\Delta t\)</span> seconds to be taken. Since, <span class="math inline">\(\Delta t\)</span> was very small in comparison to agent message updates, we kept sampling the most recent message from all neighboring agents for <span class="math inline">\(\Delta t\)</span> seconds. We kept the final set of messages and continued the algorithm. Additionally, <span class="math inline">\(2/f_{comm}\)</span> was a very small time interval compared to the latency in the context switching required by multi-threading. Thus, we empirically chose <span class="math inline">\(\Delta t\)</span> to be <span class="math inline">\(180/f_{comm}\)</span> where <span class="math inline">\(f_{comm} = 200\)</span></p></p>
 							</div>
-						</section>
-						<section>
+						</section> -->
+						<!-- <section>
 							<div class="content">
 								<header>
 
@@ -77,13 +77,13 @@
 								<p><p>The new goal selector was altered so that goal swapping could occur safely without race conditions. This was particularly important in the 2-way swaps. Swap requests for each agent were kept in a list of requests stored as a variable for each agent. Since a server could have multiple requests, there needed to be a secure way for clients to add their request to the server’s list without causing a race condition with another client trying to swap with the same server. Thus, two kinds of locks were implemented, a request lock (<span class="math inline">\(REQ\)</span>) and an acknowledgement lock (<span class="math inline">\(ACK\)</span>).</p>
 								<p>Each request list had an <span class="math inline">\(REQ\)</span> and every agent had an <span class="math inline">\(ACK\)</span>. Thus, if a client wanted to send a request to a server, it would need to obtain the corresponding <span class="math inline">\(REQ\)</span>, add its request to the list, and release the <span class="math inline">\(REQ\)</span>. The server would obtain its <span class="math inline">\(REQ\)</span> and look through the list of requests for a client who it wants to swap goals with. If such a client was there, then the server would obtain the client’s <span class="math inline">\(ACK\)</span>, send the client its goal, and release the <span class="math inline">\(ACK\)</span>. Otherwise, it would just ignore the requests (the request would be removed after a timeout interval by the client itself). Then the server would release the <span class="math inline">\(REQ\)</span> after looking through its requests. This proved to be an easy and effective way of simulating 2-way requests between multiple clients and a server.</p></p>
 							</div>
-						</section>
+						</section> -->
 						<section>
 							<div class="content">
-								<header>
+								<!-- <header>
 									<h3>Broadcaster</h3>
 								</header>
-								<p><p>To simulate broadcasting signals from a physical system at a fixed rate of <span class="math inline">\(f_{comm}\)</span>, we set each agent’s variable <span class="math inline">\(msg_i\)</span> to the current state of the agent and then had the method sleep for <span class="math inline">\(1/f_{comm}\)</span> seconds.</p></p>
+								<p><p>To simulate broadcasting signals from a physical system at a fixed rate of <span class="math inline">\(f_{comm}\)</span>, we set each agent’s variable <span class="math inline">\(msg_i\)</span> to the current state of the agent and then had the method sleep for <span class="math inline">\(1/f_{comm}\)</span> seconds.</p></p> -->
 
 								<header>
 									<h3>Extension into Continuous Domain</h3>
@@ -91,6 +91,20 @@
 								<p>With the basic algorithm established by Wang and Rubenstein simulated, we moved on to simulating the algorithm in the continuous domain. This required some more modification to allow the same convergence properties in the continuous domain.</p>
 								<p>The first modification was to choose an appropriate distance metric. While we used manhattan distance in the discrete grid setup, we switched to the L2-norm distance metric in the continuous setup. This allowed for a better approximation of the distance between points.</p>
 								<p>The second modification was to choose a different way of traversing through the space. We couldn’t just have up, down, left, and right as candidate spots for the next step. Thus, we used a polar coordinate design for stepping through the space. Each robot would be able to move the same distance per step (same radial distance) but would have the choice of the angle it could move at. We found that the more choices of angles the robot had, the slower the algorithm would be. Thus, we empirically found a resolution of 16 candidate angles to be feasible in the runtime of the algorithm.</p>
+							</div>
+						</section>
+
+						<section>
+							<div class="content">
+								<!-- <header>
+									<h3>Broadcaster</h3>
+								</header>
+								<p><p>To simulate broadcasting signals from a physical system at a fixed rate of <span class="math inline">\(f_{comm}\)</span>, we set each agent’s variable <span class="math inline">\(msg_i\)</span> to the current state of the agent and then had the method sleep for <span class="math inline">\(1/f_{comm}\)</span> seconds.</p></p> -->
+
+								<header>
+									<h3>Software</h3>
+								</header>
+								<p>In this project, we tried a variety of different software. Initially, we experimented with different simulators such as Robotarium for robotic swarms. However, most of them were built for centralized control or didn't not have functionality compatible with the parallel execution of the algorithm that we required. So, we built our own simulator from scratch. We used the Python programming language and Python's multithreading library to execute methods on separate threads. To visualize the results, we stored the data and then plotted data post simulation using Matplotlib's animation library. Our code can be found on our Github repository linked at the bottom of this website.</p>
 							</div>
 						</section>
 
