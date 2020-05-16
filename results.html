@@ -42,25 +42,30 @@
 				<div class="inner">
 					<header class="special">
 						<h2>Results</h2>
-						<p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor.</p>
+						
 					</header>
-					<div class="highlights">
+					
 						<section>
 							<div class="content">
 								<header>
-									<a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-									<h3>Feugiat consequat</h3>
+					
+									<h3>Number of agents</h3>
 								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+								<p><p>The first experiment we ran was to understand how the size of the swarm affects the performance of the algorithm. We used two metrics to judge the performance: total distance traveled by the robots <span class="math inline">\(TDT\)</span> and time taken to converge. We were confident that time taken and <span class="math inline">\(TDT\)</span> would increase as the number of agents increased since more agents would lead to more path-planning, goal assignment and overall computation. However, we noticed an interesting result in [1] where the algorithm’s performance suddenly improves (i.e. the total time and <span class="math inline">\(TDT\)</span> decreases) as the number of agents is increased. Specifically, the performance of the algorithm for  196 agents is far better than the performance for 25 to 169 and 225 to 529 agents.</p>
+						<p>We performed the same experiment with our implementation, averaging results over 6 trials per swarm size. The results are shown in Figure 1. As expected, we see an overall increase in the runtime and distance travelled as the number of robots increases. We also see the previously mentioned improvement when using five agents. On visualizing these trials on our simulator we noticed some behaviors that might be causing this anomaly. When the number of agents is too high, the number of agents sharing the same goal is larger, causing a large number of ’wait-flags’, leading to increased runtime. There is also excess travel when the robots try to swap goals and form clusters of cyclic ’traffic graphs’ which are further discussed in Section IV.C. When the number of agents is too small, the performance is good but two or three robots can hardly be called a swarm. The strange behavior of four agents showing a worse performance than five can be explained through certain behaviors identified in the simulations as well. The four agent case specifically demonstrates a strange behavior where two or three agents form a cluster in adjacent squares and alternate between swapping goals and moving back and forth. This behavior accounts for the worse performance, but can actually be controlled by decreasing the probability of swapping goals in the goal manager. Further experimentation is needed to understand the extent to which this parameter can affect performance.</p></p>
+						<a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
 							</div>
 						</section>
 						<section>
 							<div class="content">
 								<header>
-									<a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
-									<h3>Ante sem integer</h3>
+						
+									<h3>Continuous vs Discrete Experimentation</h3>
 								</header>
-								<p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+								<p>
+									<p>We compared our discrete space implementation to our continuous space modification. We ran the discrete version for runtimes of 10, 20, and 30 seconds each and recorded <span class="math inline">\(TDT\)</span>, initial distance (<span class="math inline">\(IDT\)</span>), distance to convergence (<span class="math inline">\(DTC\)</span>), percent of initial distance completed (<span class="math inline">\(PDC\)</span>), and efficiency (<span class="math inline">\(EFF\)</span>). We conducted this experiment 20 times and present here the average of the 20 trials. For the continuous case we tested runtimes of 50, 100, and 150 seconds since the continuous version took a longer time to run. We recorded the same data and conducted the experiment 10 times with the average being presented here. <span class="math inline">\(IDT\)</span> is the sum of the distances between each robot and the nearest available goal state. <span class="math inline">\(DTC\)</span> is the same as initial distance except after the time allotted for the simulation has elapsed. <span class="math inline">\(PDC\)</span> completed is <span class="math inline">\(1 - DTC/IDT\)</span> expressed as a percentage. This gives a measure for how close the system is to convergence compared to the starting configuration. This gives a good metric as we are able to compare states that start close to convergence as well as those that start far from convergence on equal footing. <span class="math inline">\(EFF\)</span> is <span class="math inline">\(IDT/(TDT + DTC)\)</span>. This allows us to compare how the estimated total distance traveled (<span class="math inline">\(TDT + DTC\)</span>) compares to the initial distance of the starting configuration.</p>
+									<p>As can be seen in Table 1, the <span class="math inline">\(TDT\)</span> of the discrete setting is higher than <span class="math inline">\(TDT\)</span> of the continuous setting (up to 5 times more). We can also see the differences in <span class="math inline">\(PDC\)</span> and <span class="math inline">\(EFF\)</span> between the two settings. <span class="math inline">\(PDC\)</span> for discrete is a lot higher than <span class="math inline">\(PDC\)</span> for continuous. This corresponds to the fact that more computation must be done in the continuous setting causing the runtime to be a lot larger. However, we can see that as runtime increases, <span class="math inline">\(EFF\)</span> of the discrete setting drops below that of the continuous setting. With larger runtime, the discrete setting requires agents to explore the grid more and take exaggerated paths around each other. However, in the continuous case, the <span class="math inline">\(EFF\)</span> remains approximately the same and is higher than the discrete setting. However, this is comparing discrete and continuous settings in different cases where the continuous setting is given a lot more time to converge. Thus, we conducted another experiment to test discrete and continuous settings at the same level.</p></p>
+									<a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
 							</div>
 						</section>
 						<section>
@@ -74,7 +79,6 @@
 						</section>
 						
 					</div>
-				</div>
 			</section>
 
 		
