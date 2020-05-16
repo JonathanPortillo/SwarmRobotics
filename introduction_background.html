@@ -36,27 +36,26 @@
 			</nav>
 
 		<!-- Banner -->
-			
+
 
 		<!-- Highlights -->
 			<section class="wrapper">
 				<div class="inner">
 					<header class="special">
 						<h2>Introduction and Background</h2>
-						<p>Swarm robotics is a field of robotics in which multiple robots work together to complete a task. Research in this field has several applications ranging from nanotechnology to defense. There are two main approaches in swarm robotics. The first is a centralized approach where all robots have access to global information and a centralized controller drives them to a goal state. The other type is decentralized control where each robot can only communicate with its neighbors but the swarm must still be able to coordinate itself. While all robots have global information and it is easier to control the swarm into particular patterns in the centralized approach, it is also computationally heavier than the decentralized one. In the decentralized approach, robots work with reduced access to information allowing for faster computations and faster maneuvers though it is harder to coordinate such an unorganized swarm.
-
+						<p>Swarm robotics is a field of robotics in which multiple robots work together to complete a task. Research in this field has several applications ranging from nanotechnology to defense. There are two main approaches in swarm robotics. The first is a centralized approach where all robots have access to global information and a centralized controller drives them to a goal state. The other type is decentralized control where each robot can only communicate with its neighbors but the swarm must still be able to coordinate itself. Decentralized control is appealing due to the ability of the swarm to self coordinate despite each robot having limited information. This allows for fast computation and quick convergence. However, the main challenge is actually controlling such a swarm.\n
 						One of the fundamental problems in swarm systems is shape formation. Wang and Rubenstein [1] propose an algorithm for the decentralized version of this problem, where robots can provably converge to a desired shape. This is appealing for both the speed of convergence and the fact that they have proven the algorithm to converge successfully, an assurance that is difficult to provide in the field of decentralized control. We further examine their claims and look for ways to extend their work for better efficiency.</p>
 						<img class = "w3-card" src="images/intro1.png" alt="" />
 						<img class = "w3-card" src="images/intro2.png" alt="" />
 						<img class = "w3-card" src="images/intro3.png" alt="" />
 					</header>
-					
+
 						<section>
 							<div class="content">
 								<header>
 									<h3>Problem statement</h3>
 								</header>
-								<p>In this paper we explore the usage of multi-robotic decen-tralized  controllers  for  the  purpose  of  creating  an  efficientand dynamic algorithm for shape formation. Using the feed-back  from  the  agents  in  our  system  allows  our  controllersto  make  a  movement  decision  for  each  of  our  agents.  Oursimulation  based  experiments  consists  of  large  quantity  ofagents in a given map with and without constraints</p>
+								<p>In this paper we explore the usage of multi-robotic decentralized  controllers  for  the  purpose  of  creating  an  efficient and dynamic algorithm for shape formation. Using the feedback  from  the  agents  in  our  system  allows  our  controllers to  make  a  movement  decision  for  each  of  our  agents.  Our simulation  based  experiments  consists  of  large  quantity  of agents in a given map with and without constraints</p>
 							</div>
 						</section>
 						<section>
@@ -65,7 +64,7 @@
 									<h3>Motivation</h3>
 								</header>
 								<p> A large part of the motivation for this project came from sharing the same skepticism as Professor Sastry when we first read Wang and Rubinstein's paper [1]. It seemed too good to be true and we were curious to see if we could replicate their results. Many aspects of the paper seemed like they could be further explored, such the use of a discrete space and non-complex metrics. Furthermore, work by other groups as discussed in Section II largely shaped the direction of our project.
- 
+
  								As explained in the introduction, we are interested in improving the decentralized control of swarms. We are specifically interested in exploring [1] and it serves as our primary motivation. We are also inspired by content covered in EECS 106B projects such as path planning with object avoidance, trajectory planning and intelligent goal picking. We made use of our insights from exploring these topics in lab throughout this project. We also made use of our previous work with Rapidly-Exploring Random Trees (RRTs) and goal selecting when working on the goal manager for our algorithm. We also used our understanding of optimization problems from class to evaluate the performance of the algorithm and used our understanding of controllers to build the asynchronous simulator.</p>
 							</div>
 						</section>
@@ -77,12 +76,12 @@
 								<p>We have two primary goals in this project. The first is toimplement a simulator for synchronous decentralized swarmswhich simulates communication as well as robot motion. Thesecond  is  to  extend  Wang  and  Rubinstein’s  algorithm  from[1] to the continuous domain</p>
 							</div>
 						</section>
-						
-					
+
+
 				</div>
 			</section>
 
-		
+
 
 		<!-- About Us -->
 			<section class="wrapper">
