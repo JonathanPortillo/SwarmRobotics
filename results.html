@@ -36,20 +36,20 @@
 			</nav>
 
 		<!-- Banner -->
-			
+
 
 		<!-- Highlights -->
 			<section class="wrapper">
 				<div class="inner">
 					<header class="special">
 						<h2>Results</h2>
-						
+
 					</header>
-					
+
 						<section>
 							<div class="content">
 								<header>
-					
+
 									<h3>Number of agents</h3>
 								</header>
 								<p><p>The first experiment we ran was to understand how the size of the swarm affects the performance of the algorithm. We used two metrics to judge the performance: total distance traveled by the robots <span class="math inline">\(TDT\)</span> and time taken to converge. We were confident that time taken and <span class="math inline">\(TDT\)</span> would increase as the number of agents increased since more agents would lead to more path-planning, goal assignment and overall computation. However, we noticed an interesting result in [1] where the algorithm’s performance suddenly improves (i.e. the total time and <span class="math inline">\(TDT\)</span> decreases) as the number of agents is increased. Specifically, the performance of the algorithm for  196 agents is far better than the performance for 25 to 169 and 225 to 529 agents.</p>
@@ -61,7 +61,7 @@
 						<section>
 							<div class="content">
 								<header>
-						
+
 									<h3>Continuous vs Discrete Experimentation</h3>
 								</header>
 								<p>
@@ -73,21 +73,22 @@
 						<section>
 							<div class="content">
 								<header>
-					
+
 									<h3>Continuous vs Discrete Analysis</h3>
 								</header>
 								<p><p>We ran experiments to compare the performance of our continuous space planner with that of the discrete planner where both settings are allowed a maximum runtime of 150 seconds. Figure 2 compares these algorithms with data averaged over 35 trials. Figure 2(a) shows a familiar results, with the red line following a similar trend as the previously discussed Figure 1(a). The blue shows the biggest con of using the continuous version, high running time. As discussed before, this is expected since the continuous version is sampling an exponentially larger number of goals and potential paths than the discrete version. It also faces more behavioral issues such a deadlocks due to an incomplete characterization of the L2-norm distance metric.</p>
 								<p>Figure 2(b), on the other hand, shows the benefits of using the continuous algorithm. The total distance traveled by the swarm before convergence is much lower in the continuous case as the swarm isn’t restricted to Manhattan paths. While this does increase the runtime, it finds a more optimal path to the goals than [1]. The rate of increase in distance traveled with the swarm size is also worth noting. The discrete swarms face more complexity as the size increases since the number of possible collision paths is comparable to the total number of paths. This problem is not prominent in the continuous case as there are infinite possible paths.</p>
 								<p>Figure 3(c) shows the effect of swarm size on efficiency. As swarm size increases, the efficiency drops for both continuous and discrete cases drops. This is because with more robots, the agents swap goals more often and tend to explore more before convergence. Thus, <span class="math inline">\(TDT + DTC\)</span> tends to increase with larger swarm size. However, around a swarm size of 5 to 7 robots, the continuous case has an efficiency equaling or exceeding that of the discrete case. The time saved in moving directly to the goal becomes more useful with a larger swarm size.</p></p>
+								<img src="images/size_time.png" height="50%" width=60% alt="" />
+								<img src="images/size_tdt.png" height="50%" width=60% alt="" />
 								<img src="images/size_eff.png" height="50%" width=60% alt="" />
-						<img src="images/size_tdt.png" height="50%" width=60% alt="" />
 							</div>
 						</section>
-						
+
 					</div>
 			</section>
 
-		
+
 
 		<!-- About Us -->
 			<section class="wrapper">
@@ -99,7 +100,7 @@
 						<section>
 							<div class="content">
 								<blockquote>
-									<p>EECS 2020</p>
+									<p>EECS / 2020</p>
 								</blockquote>
 								<div class="author">
 									<div class="image">
@@ -143,7 +144,7 @@
 			<footer id="footer">
 				<div class="inner">
 					<div class="content">
-						
+
 						<section>
 							<h4>Project Repository</h4>
 							<ul class="plain">
